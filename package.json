@@ -1,0 +1,25 @@
+{
+	"name": "homeworkorganizer",
+	"version": "1.0.0",
+	"description": "App to schedule, organize, and mark off homework or tasks",
+	"main": "index.js",
+	"scripts": {
+		"start": "node server/index.js",
+		"dev": "nodemon server/index.js"
+	},
+	"author": "Isaac Folmsbee",
+	"license": "ISC",
+	"devDependencies": {
+		"nodemon": "^2.0.6"
+	},
+	"dependencies": {
+		"axios": "^0.21.0",
+		"bcryptjs": "^2.4.3",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"joi": "^17.3.0",
+		"jsonwebtoken": "^8.5.1",
+		"mongodb": "^3.6.3"
+	}
+}
