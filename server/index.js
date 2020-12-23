@@ -3,7 +3,7 @@ const cors = require('cors');
 const app = express();
 
 // Importing routes
-const auth = require('./routes/api/auth');
+const auth = require('./routes/api/user');
 const tasks = require('./routes/api/tasks');
 
 // Middlewares
