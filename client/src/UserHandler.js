@@ -4,7 +4,7 @@ const url = 'http://localhost:5000/api/user/';
 
 class UserHandler {
 	// Register User
-	static async registerUser(username, email, password) {
+	static async registerUser(email, password) {
 		try {
 			const response = await axios.post(url + 'register', {
 				email,

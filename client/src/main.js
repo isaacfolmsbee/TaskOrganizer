@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import App from './App.vue';
+
 import Register from './components/Register.vue';
 import Login from './components/Login.vue';
 import Tasks from './components/Tasks.vue';
