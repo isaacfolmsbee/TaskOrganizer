@@ -16,6 +16,9 @@ app.use('/api/tasks', tasks);
 
 // Handle production
 if(process.env.NODE_ENV === 'production') {
+
+	console.log('production mode detected');
+	
 	// Static folder
 	app.use(express.static(__dirname + '/public/'));
 
