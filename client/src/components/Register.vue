@@ -7,9 +7,9 @@
 			<input type="password" v-model="confirmpassword" id="confirmpassword" placeholder="Confirm Password...">
 			<button @click="registerUser()">Register</button>
 			<hr>
-			<p>Already have an account? - </p>
-			<a href="/login">Login</a>
 		</div>
+		<p>Already have an account? - </p>
+		<a href="/login">Login</a>
 	</div>
 </template>
 
