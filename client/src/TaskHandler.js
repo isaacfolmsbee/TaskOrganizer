@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/api/tasks/';
+const url = 'api/tasks/';
 
 class TaskHandler {
 
