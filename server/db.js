@@ -14,7 +14,7 @@ async function dbclient(collection) {
 		}
 	);
 
-	return client.db('testCluster1').collection(collection);
+	return client.db('homeworkOrganizer').collection(collection);
 }
 
 module.exports = dbclient;
