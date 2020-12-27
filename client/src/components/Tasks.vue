@@ -125,8 +125,8 @@ export default {
 }
 
 .task.deleted {
-	background-color: rgba(255, 0, 0, 0.651);
-	transition: 375ms;
+	background-color: rgba(255, 0, 0, 0.568);
+	transition: 300ms;
 }
 
 @media only screen and (max-width: 850px) {

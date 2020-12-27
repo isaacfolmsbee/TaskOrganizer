@@ -43,6 +43,8 @@ router.post('/', verify, async (req, res) => {
 router.delete('/:id', verify, async (req, res) => {
 	const tasks = await dbHandler('tasks');
 	
+	await sleep(300);
+
 	await tasks.updateOne(
 		{ userid: mongodb.ObjectID(req.user._id) },
 		{ $pull: { tasks: { _id: mongodb.ObjectID(req.params.id) } } }
