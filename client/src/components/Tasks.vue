@@ -54,7 +54,7 @@ export default {
 		async deleteTask(task) {
 			task.isDeleted = true;
 
-			await new Promise(r => setTimeout(r, 2000));
+			await new Promise(r => setTimeout(r, 350));
 
 			await TaskHandler.deleteTask(task._id, this.authtoken);
 			this.tasks = await TaskHandler.getTasks(this.authtoken);
@@ -128,7 +128,7 @@ export default {
 
 .task.deleted {
 	background-color: rgba(255, 0, 0, 0.568);
-	transition: 300ms;
+	transition: 350ms;
 }
 
 @media only screen and (max-width: 850px) {
