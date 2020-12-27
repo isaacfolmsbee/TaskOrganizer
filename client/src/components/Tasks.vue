@@ -54,8 +54,8 @@ export default {
 		async deleteTask(task) {
 			task.isDeleted = true;
 
-			await setTimeout(TaskHandler.deleteTask(task._id, this.authtoken), 300);
-			this.tasks = await TaskHandler.getTasks(this.authtoken);
+			await TaskHandler.deleteTask(task._id, this.authtoken);
+			this.tasks = await setTimeout(TaskHandler.getTasks(this.authtoken), 300);
 		},
 		async editTask(task) {
 			this.text = task.text;
