@@ -54,10 +54,10 @@ export default {
 		async deleteTask(task) {
 			task.isDeleted = true;
 
-			await setTimeout(() => {
-				TaskHandler.deleteTask(task._id, this.authtoken);
-				this.tasks = TaskHandler.getTasks(this.authtoken);
-			}, 300);
+			await new Promise(r => setTimeout(r, 2000));
+
+			await TaskHandler.deleteTask(task._id, this.authtoken);
+			this.tasks = await TaskHandler.getTasks(this.authtoken);
 		},
 		async editTask(task) {
 			this.text = task.text;
