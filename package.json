@@ -1,5 +1,5 @@
 {
-	"name": "homeworkorganizer",
+	"name": "taskorganizer",
 	"version": "1.0.0",
 	"description": "App to schedule, organize, and mark off homework or tasks",
 	"main": "index.js",
@@ -7,7 +7,7 @@
 		"start": "node server/index.js",
 		"dev": "nodemon server/index.js"
 	},
-	"author": "Isaac Folmsbee",
+	"author": "Isaac F",
 	"license": "ISC",
 	"devDependencies": {
 		"nodemon": "^2.0.6"

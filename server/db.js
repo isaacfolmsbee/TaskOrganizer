@@ -14,7 +14,7 @@ async function dbclient(collection) {
 		}
 	);
 
-	return client.db('homeworkOrganizer').collection(collection);
+	return client.db('taskOrganizer').collection(collection);
 }
 
 module.exports = dbclient;
