@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv');
 const app = express();
+
+//Export ENV variables
+dotenv.config();
 
 // Importing routes
 const auth = require('./routes/api/user');

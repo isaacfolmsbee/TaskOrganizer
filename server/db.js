@@ -1,8 +1,4 @@
-const dotenv = require('dotenv');
 const mongodb = require('mongodb');
-
-//Get ENV variables
-dotenv.config();
 
 async function dbclient(collection) {
 
