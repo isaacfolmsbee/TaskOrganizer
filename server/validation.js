@@ -31,5 +31,25 @@ const loginValidation = (data) => {
 	return schema.validate(data);
 };
 
+const taskValidation = (data) => {
+	const schema = Joi.object({
+		text: Joi.string().required().messages({
+			'any.required': 'A description is required',
+			'string.empty': 'A description is required',
+		}),
+		dueDate: Joi.string().required().messages({
+			'any.required': 'A due date is required',
+			'string.empty': 'A due date is required',
+		}),
+		timeToComplete: Joi.string().required().messages({
+			'any.required': 'A time estimate is required',
+			'string.empty': 'A time estimate is required',
+		}),
+	});
+
+	return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
+module.exports.taskValidation = taskValidation;

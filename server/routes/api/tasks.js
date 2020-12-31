@@ -2,6 +2,7 @@ const express = require('express');
 const mongodb = require('mongodb');
 const dbHandler = require('../../db');
 const verify = require('../../verifyToken');
+const { taskValidation } = require('../../validation');
 const router = express.Router();
 
 router.get('/', verify, async (req, res) => {
@@ -14,6 +15,12 @@ router.get('/', verify, async (req, res) => {
 
 router.post('/', verify, async (req, res) => {
 	const tasks = await dbHandler('tasks');
+
+	// Check if valid
+	const { error } = taskValidation(req.body);
+	if (error) {
+		return res.status(400).send(error.details[0].message);
+	}
 
 	await tasks.updateOne(
 		{ userid: new mongodb.ObjectID(req.user._id) },
@@ -42,6 +49,8 @@ router.post('/', verify, async (req, res) => {
 
 router.delete('/:id', verify, async (req, res) => {
 	const tasks = await dbHandler('tasks');
+
+	// Add a check for if the id exists to send appropriate status code
 
 	await tasks.updateOne(
 		{ userid: mongodb.ObjectID(req.user._id) },
