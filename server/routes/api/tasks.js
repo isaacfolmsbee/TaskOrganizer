@@ -50,14 +50,20 @@ router.post('/', verify, async (req, res) => {
 router.delete('/:id', verify, async (req, res) => {
 	const tasks = await dbHandler('tasks');
 
-	// Add a check for if the id exists to send appropriate status code
+	try {
+		const result = await tasks.updateOne(
+			{ userid: mongodb.ObjectID(req.user._id) },
+			{ $pull: { tasks: { _id: mongodb.ObjectID(req.params.id) } } }
+		);
 
-	await tasks.updateOne(
-		{ userid: mongodb.ObjectID(req.user._id) },
-		{ $pull: { tasks: { _id: mongodb.ObjectID(req.params.id) } } }
-	);
-
-	res.status(200).send();
+		if (result.modifiedCount >= 1) {
+			res.status(200).send();
+		} else {
+			res.status(400).send();
+		}
+	} catch (error) {
+		return res.status(400).send();
+	}
 });
 
 module.exports = router;

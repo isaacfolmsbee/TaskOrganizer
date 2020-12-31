@@ -41,9 +41,9 @@ const taskValidation = (data) => {
 			'any.required': 'A due date is required',
 			'string.empty': 'A due date is required',
 		}),
-		timeToComplete: Joi.string().required().messages({
+		timeToComplete: Joi.number().required().messages({
 			'any.required': 'A time estimate is required',
-			'string.empty': 'A time estimate is required',
+			'number.base': 'The time estimate must be a number',
 		}),
 	});
 
