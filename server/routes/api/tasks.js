@@ -26,7 +26,7 @@ router.post('/', verify, async (req, res) => {
 		{ userid: new mongodb.ObjectID(req.user._id) },
 		{
 			$push: {
-				tasks: {
+				[`categories.${req.body.category}`]: {
 					$each: [
 						{
 							_id: new mongodb.ObjectID(),
@@ -47,13 +47,19 @@ router.post('/', verify, async (req, res) => {
 	res.status(201).send();
 });
 
-router.delete('/:id', verify, async (req, res) => {
+router.delete('/:category/:id', verify, async (req, res) => {
 	const tasks = await dbHandler('tasks');
 
 	try {
 		const result = await tasks.updateOne(
 			{ userid: mongodb.ObjectID(req.user._id) },
-			{ $pull: { tasks: { _id: mongodb.ObjectID(req.params.id) } } }
+			{
+				$pull: {
+					[`categories.${req.params.category}`]: {
+						_id: mongodb.ObjectID(req.params.id),
+					},
+				},
+			}
 		);
 
 		if (result.modifiedCount >= 1) {

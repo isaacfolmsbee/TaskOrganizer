@@ -33,6 +33,10 @@ const loginValidation = (data) => {
 
 const taskValidation = (data) => {
 	const schema = Joi.object({
+		category: Joi.string().required().messages({
+			'any.required': 'A category is required',
+			'string.empty': 'A category is required',
+		}),
 		text: Joi.string().required().messages({
 			'any.required': 'A description is required',
 			'string.empty': 'A description is required',
