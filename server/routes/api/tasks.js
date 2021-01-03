@@ -79,6 +79,29 @@ router.post('/category', verify, async (req, res) => {
 	res.status(201).send();
 });
 
+router.delete('/category', verify, async (req, res) => {
+	const tasks = await dbHandler('tasks');
+
+	// Check if valid
+	const { error } = categoryValidation(req.body);
+	if (error) {
+		return res.status(400).send(error.details[0].message);
+	}
+
+	await tasks.updateOne(
+		{
+			userid: new mongodb.ObjectID(req.user._id)
+		},
+		{
+			$unset: {
+				[`categories.${req.body.category}`]: "",
+			},
+		}
+	);
+
+	res.status(200).send();
+});
+
 router.delete('/:category/:id', verify, async (req, res) => {
 	const tasks = await dbHandler('tasks');
 
