@@ -54,6 +54,18 @@ const taskValidation = (data) => {
 	return schema.validate(data);
 };
 
+const categoryValidation = (data) => {
+	const schema = Joi.object({
+		category: Joi.string().required().messages({
+			'any.required': 'A category is required',
+			'string.empty': 'A category is required',
+		}),
+	});
+
+	return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.taskValidation = taskValidation;
+module.exports.categoryValidation = categoryValidation;

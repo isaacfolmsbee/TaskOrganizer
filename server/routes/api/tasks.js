@@ -2,7 +2,7 @@ const express = require('express');
 const mongodb = require('mongodb');
 const dbHandler = require('../../db');
 const verify = require('../../verifyToken');
-const { taskValidation } = require('../../validation');
+const { taskValidation, categoryValidation } = require('../../validation');
 const router = express.Router();
 
 router.get('/', verify, async (req, res) => {
@@ -41,6 +41,38 @@ router.post('/', verify, async (req, res) => {
 		},
 		{
 			upsert: true,
+		}
+	);
+
+	res.status(201).send();
+});
+
+router.post('/category', verify, async (req, res) => {
+	const tasks = await dbHandler('tasks');
+
+	// Check if valid
+	const { error } = categoryValidation(req.body);
+	if (error) {
+		return res.status(400).send(error.details[0].message);
+	}
+
+	// Check if the user has a task document
+	const hasDocument = await tasks.findOne({
+		userid: new mongodb.ObjectID(req.user._id),
+	});
+
+	await tasks.updateOne(
+		{
+			userid: new mongodb.ObjectID(req.user._id),
+			[`categories.${req.body.category}`]: { $exists: false },
+		},
+		{
+			$set: {
+				[`categories.${req.body.category}`]: [],
+			},
+		},
+		{
+			upsert: !hasDocument
 		}
 	);
 
