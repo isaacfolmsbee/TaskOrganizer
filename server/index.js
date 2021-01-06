@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const dotenv = require('dotenv');
 const app = express();
 
@@ -12,7 +11,6 @@ const tasks = require('./routes/api/tasks');
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
 
 // Route Middlewares
 app.use('/api/user', auth);
