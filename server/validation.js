@@ -10,7 +10,7 @@ const registerValidation = (data) => {
 		}),
 		password: Joi.string().required().min(8).messages({
 			'string.empty': 'password is required',
-			'string.min': 'password must be atleast 8 characters',
+			'string.min': 'password minimum is 8 characters',
 		}),
 	});
 
@@ -23,7 +23,7 @@ const loginValidation = (data) => {
 			'string.empty': 'email is required',
 			'string.email': 'invalid email',
 		}),
-		password: Joi.string().required().min(8).messages({
+		password: Joi.string().required().messages({
 			'string.empty': 'password is required',
 		}),
 	});
@@ -33,19 +33,22 @@ const loginValidation = (data) => {
 
 const taskValidation = (data) => {
 	const schema = Joi.object({
-		category: Joi.string().required().messages({
+		category: Joi.string().max(12).required().messages({
 			'any.required': 'A category is required',
 			'string.empty': 'A category is required',
+			'string.max': 'Category has a 12 character limit',
 		}),
-		text: Joi.string().required().messages({
+		text: Joi.string().max(100).required().messages({
 			'any.required': 'A description is required',
 			'string.empty': 'A description is required',
+			'string.max': 'Description has a 100 character limit',
 		}),
 		dueDate: Joi.date().required().messages({
 			'any.required': 'A due date is required',
 		}),
-		timeToComplete: Joi.number().required().messages({
+		timeToComplete: Joi.number().min(1).required().messages({
 			'any.required': 'A time estimate is required',
+			'number.min': 'A time estimate is required',
 			'number.base': 'The time estimate must be a number',
 		}),
 	});
@@ -55,9 +58,10 @@ const taskValidation = (data) => {
 
 const categoryValidation = (data) => {
 	const schema = Joi.object({
-		category: Joi.string().required().messages({
+		category: Joi.string().max(12).required().messages({
 			'any.required': 'A category is required',
 			'string.empty': 'A category is required',
+			'string.max': 'Max length 12 characters',
 		}),
 	});
 
