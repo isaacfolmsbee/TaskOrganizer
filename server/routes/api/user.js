@@ -1,8 +1,14 @@
 const router = require('express').Router();
+const mongodb = require('mongodb');
 const dbHandler = require('../../db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { registerValidation, loginValidation } = require('../../validation');
+const {
+	registerValidation,
+	loginValidation,
+	themeValidation,
+} = require('../../validation');
+const verify = require('../../verifyToken');
 
 router.post('/register', async (req, res) => {
 	const users = await dbHandler('users');
@@ -58,6 +64,36 @@ router.post('/login', async (req, res) => {
 	// Create and assign a token
 	const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 	res.header('authtoken', token).status(202).send(token);
+});
+
+router.post('/theme', verify, async (req, res) => {
+	const users = await dbHandler('users');
+
+	const { error } = themeValidation(req.body);
+	if (error) {
+		res.status(400).send(error.details[0].message);
+	}
+
+	await users.updateOne(
+		{ _id: new mongodb.ObjectID(req.user._id) },
+		{
+			$set: {
+				lightTheme: req.body.theme,
+			},
+		}
+	);
+
+	res.status(201).send();
+});
+
+router.get('/theme', verify, async (req, res) => {
+	const users = await dbHandler('users');
+
+	const response = await users.findOne({
+		_id: new mongodb.ObjectID(req.user._id),
+	});
+
+	res.status(200).send(response.lightTheme);
 });
 
 module.exports = router;

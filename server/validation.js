@@ -70,7 +70,18 @@ const categoryValidation = (data) => {
 	return schema.validate(data);
 };
 
+const themeValidation = (data) => {
+	const schema = Joi.object({
+		theme: Joi.bool().required().messages({
+			'any.required': 'A theme is required',
+		}),
+	});
+
+	return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.taskValidation = taskValidation;
 module.exports.categoryValidation = categoryValidation;
+module.exports.themeValidation = themeValidation;
