@@ -33,11 +33,11 @@ const loginValidation = (data) => {
 
 const taskValidation = (data) => {
 	const schema = Joi.object({
-		category: Joi.string().alphanum().max(12).required().messages({
+		category: Joi.string().alphanum().max(15).required().messages({
 			'any.required': 'A category is required',
 			'string.alphanum': 'Category can only contain letters and numbers',
 			'string.empty': 'A category is required',
-			'string.max': 'Category has a 12 character limit',
+			'string.max': 'Category has a 15 character limit',
 		}),
 		text: Joi.string().max(100).required().messages({
 			'any.required': 'A description is required',
@@ -59,11 +59,11 @@ const taskValidation = (data) => {
 
 const categoryValidation = (data) => {
 	const schema = Joi.object({
-		category: Joi.string().alphanum().max(12).required().messages({
+		category: Joi.string().alphanum().max(15).required().messages({
 			'any.required': 'A category is required',
 			'string.alphanum': 'Must only contain letters and numbers',
 			'string.empty': 'A category is required',
-			'string.max': 'Max length 12 characters',
+			'string.max': 'Max length 15 characters',
 		}),
 	});
 
