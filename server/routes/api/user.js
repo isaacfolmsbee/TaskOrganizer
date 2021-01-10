@@ -78,7 +78,7 @@ router.post('/theme', verify, async (req, res) => {
 		{ _id: new mongodb.ObjectID(req.user._id) },
 		{
 			$set: {
-				lightTheme: req.body.theme,
+				lightTheme: req.body.lightTheme,
 			},
 		}
 	);

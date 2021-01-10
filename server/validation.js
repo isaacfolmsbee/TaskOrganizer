@@ -72,7 +72,7 @@ const categoryValidation = (data) => {
 
 const themeValidation = (data) => {
 	const schema = Joi.object({
-		theme: Joi.bool().required().messages({
+		lightTheme: Joi.bool().required().messages({
 			'any.required': 'A theme is required',
 		}),
 	});
